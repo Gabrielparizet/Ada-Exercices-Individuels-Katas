@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+// Etape 1
+let trip = 'Perdita 8 10 8';
+let trip2 = 'Pongo 19 7 14';
+
+function parsetrip(x){
+    const arr1 = x.toString().split(" ");
+    const objet = {
+        'client': arr1[0],
+        'start' : parseInt(arr1[1]), // Je transforme mes strings en integer. 
+        'duration' : parseInt(arr1[2]),
+        'price' : parseInt(arr1[3])
+}
+return objet;
+}
+console.log(parsetrip(trip));
+
+// Etape 2
+let tripsToParse = [
+	"Roger 0 5 10",
+	"Pongo 3 7 14",
+	"Perdita 8 10 8",
+	"Anita 16 3 7"
+]
+
+function parsetrip2(y){ // Cette fonction transforme ma liste de voyage (un tableau de string) en un tableau d'objet.
+    let objet2 = [];
+    for (i in y){
+        objet2.push(parsetrip(y[i]))
+    }
+return objet2;
+}
+
+console.log(parsetrip2(tripsToParse))
+
+// Etape 3
+function getTripsPrice(z){
+    let prix = 0 // J'initialise un compteur à zéro. 
+    let objet3 = parsetrip2(z);  // Je transforme ma liste de voyages en un tableau de voyages (objet) que je stocke dans une variable. 
+    for (let i = 0; i < objet3.length; i++){ // Pour chaque élément de mon nouveau tableau,
+        prix += objet3[i].price; // Je viens chercher la clef "price" de chaque objet "voyage", la transforme en integer et les additionne.
+    }
+    return prix;
+}
+console.log(getTripsPrice(tripsToParse))
+
+// Etape 4
+function checkCompatibility(tripA, tripB){
+let objet4 = parsetrip(tripA); // Je transforme tripA en objet avec parsetrip et la stocke dans une variable objet4.
+let objet5 = parsetrip(tripB); // Je transforme tripB en objet avec parsetrip et la stocke dans une variable objet5.
+let startA = objet4.start; // Je créé une variable startA contenant la valeur de la clef 'start' de l'objet4 et la transforme en nombre.
+let durationA = objet4.duration; // Je créé une variable durationA contenant la valeur de la clef 'duration' de l'objet4 et la transforme en nombre.
+let arrivalA = startA + durationA; // Je créé la variable arrivalA correspondant à la somme de start1 + durationA
+let startB = objet5.start; // Je créé une variable startB contenant la valeur de la clef 'start' de l'objet5 et la tranforme en nombre.
+if (arrivalA > startB){
+    return false;
+} else {
+    return true; // ligne non nécessaire
+}
+}
+console.log(checkCompatibility(trip, trip2));
+
+// Etape 5
+function findCompatibilities(trips){
+    let compatibility = []
+    let i = 0;
+    for (i in trips){
+        for (j in trips){
+            if (checkCompatibility(trips[i], trips[j]) === true) {
+                compatibility.push([parsetrip(trips[i]), parsetrip(trips[j])]);
+            }
+        }
+    }
+    return compatibility;
+}
+console.log(findCompatibilities(tripsToParse));
+
+
+
+    </script>
+</body>
+</html>

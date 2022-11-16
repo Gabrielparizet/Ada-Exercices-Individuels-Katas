@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Mon Traducteur de Morse</h1>
+
+    <label for="'Latin">Texte en caractères latin:</label>
+    <input type="text" id="latin_text"> 
+    <button onclick=encode_en_morse()>OK</button>
+    <label for="Latin" id="morse_text"></label>
+
+    <script>
+
+        // Annexe 1:
+    const latinToMorse = {
+        'A':'.-',
+        'B':'-...',
+        'C':'-.-.',
+        'D':'-..',
+        'E':'.',
+        'F':'..-.',
+        'G':'--.',
+        'H':'....',
+        'I':'..',
+        'J':'.---',
+        'K':'-.-',
+        'L':'.-..',
+        'M':'--',
+        'N':'-.',
+        'O':'---',
+        'P':'.--.',
+        'Q':'--.-',
+        'R':'.-.',
+        'S':'...',
+        'T':'-',
+        'U':'..-',
+        'V':'...-',
+        'W':'.--',
+        'X':'-..-',
+        'Y':'-.--',
+        'Z':'--..',
+        ' ':' '
+    }
+
+        // Etape 1:
+
+        // Solution 1 :
+
+        function getLatinCharacterList(texte){
+            let texteMaj = texte.toUpperCase() // Retourne la valeur de texte en majuscule.
+            return Array.from(texteMaj); // Retourne chaque caractère de texteMaj sous forme de tableau. 
+        }
+
+        console.log(getLatinCharacterList("Hello, World"))
+
+        // Solution 2 :
+        /*function getLatinCharacterList(texte){
+            let texteMaj = texte.toUpperCase();
+            let i = 0;
+            let tabChar = [];
+            while (i <= texteMaj.length - 1){
+                tabChar[i] = texteMaj[i];
+                i++
+            }
+            return tabChar
+        }
+        console.log(getLatinCharacterList("Hello, World"))*/
+
+        // Etape 2:
+
+        function translateLatinCharacter (charLatin){
+            let value = latinToMorse[charLatin];
+            return value;
+        }
+        console.log(translateLatinCharacter('A'));
+
+        // Etape 3:
+
+        function encode(text){
+            let tabChar = getLatinCharacterList(text)
+            let result = ""
+            tabChar.forEach(element => {
+            result += " " + translateLatinCharacter(element)
+            })
+            return result;
+        }
+
+        console.log(encode("Hello"));
+
+        function encode_en_morse(){
+            let inputVal = document.getElementById("latin_text").value;
+            let resultVal = encode(inputVal)
+            document.getElementById("morse_text").innerHTML = resultVal
+        }
+    </script>
+    
+</body>
+</html>
