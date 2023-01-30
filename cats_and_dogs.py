@@ -15,4 +15,4 @@ def human_years_cat_years_dog_years(human_years):
         years_counter += 1
     return [human_years, cat_years, dog_years]
 
-print (human_years_cat_years_dog_years(4))
+print (human_years_cat_years_dog_years(12))
