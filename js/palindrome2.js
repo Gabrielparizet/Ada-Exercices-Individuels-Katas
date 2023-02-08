@@ -1,4 +1,4 @@
-a = "hello"
+a = "helleh"
 function palindrome(str){
     let str2 = str.replace(/[^a-zA-Z0-9éèù]/g, '').toLowerCase(); // removes all characters between the [] and replaces them with whats between the '' symbols. 
     let longueur = str2.length;
